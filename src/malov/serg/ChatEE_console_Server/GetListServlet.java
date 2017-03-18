@@ -1,12 +1,14 @@
 package malov.serg.ChatEE_console_Server;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
+@WebServlet(name = "getlist", urlPatterns = "/get")
 public class GetListServlet extends HttpServlet {
     MessageList msgList=MessageList.getInstance();
 
