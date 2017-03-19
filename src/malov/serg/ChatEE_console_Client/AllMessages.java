@@ -47,7 +47,7 @@ public class AllMessages extends Thread{
                         is.read(buf);
                         Gson gson = new GsonBuilder().create();
                         Message[] messages = gson.fromJson(new String(buf), Message[].class);
-                        //--------------- какоето-окошко прикрутить
+                        //---------------
                         for(int i=0;i<messages.length-1;++i)
                             System.out.println(messages[i].toString());
                         //---------------
