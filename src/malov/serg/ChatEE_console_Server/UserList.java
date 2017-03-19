@@ -11,9 +11,9 @@ public class UserList { //singleton
 
     public static UserList getInstance(){return ul;}
     private UserList(){
-        list.add(new User("Andrey","1"));
-        list.add(new User("Vova","2"));
-        list.add(new User("Roma","3"));
+        list.add(new User("Sergey","ser"));
+        list.add(new User("Tanya","tan "));
+        list.add(new User("Artem","art"));
     }
     public String toJson(){
         Gson gson=new GsonBuilder().create();

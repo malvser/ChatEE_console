@@ -10,9 +10,9 @@ public class Main {
         System.out.println("for rooms type word - red or blue or green or default");
         System.out.println("private message type- user:text ");
         System.out.println("for user info type- users");
-        System.out.println("login Andrey pass 1");
-        System.out.println("login Vova pass 2");
-        System.out.println("login Roma pass 3");
+        System.out.println("login: Sergey, password: ser");
+        System.out.println("login: Tanya, password: tan");
+        System.out.println("login: Artem, password: art");
         System.out.println("----------------------------------------------------------");
         Logik.startChat();
     }
