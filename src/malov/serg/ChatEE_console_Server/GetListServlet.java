@@ -14,13 +14,19 @@ public class GetListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String ns=req.getParameter("n");
-        int n=Integer.parseInt(ns);
-        String to=req.getParameter("to");
-        String room=req.getParameter("room");
-        String jsonMessages=msgList.toJSON(n,to,room);
-        if(jsonMessages!=null){
-            OutputStream os=resp.getOutputStream();
+        String ns = req.getParameter("n");
+        int n = 0;
+        try {
+            n = Integer.parseInt(ns);
+        } catch (Exception ex) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+        String to = req.getParameter("to");
+        String room = req.getParameter("room");
+        String jsonMessages = msgList.toJSON(n,to,room);
+        if(jsonMessages != null){
+            OutputStream os = resp.getOutputStream();
             os.write(jsonMessages.getBytes());
         }
     }
