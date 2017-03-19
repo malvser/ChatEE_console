@@ -8,28 +8,43 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 @WebServlet(name = "user",urlPatterns = "/user")
 public class UserServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        InputStream is=req.getInputStream();
-        //----------------------------------
-        byte[] buf=new byte[req.getContentLength()];
-        is.read(buf);
-        User user=User.fromJSON(new String(buf));
-        String param=parseParam(req.getQueryString());
+        byte[] buf = requestBodyToArray(req);
+        String bufStr = new String(buf, StandardCharsets.UTF_8);
+        User user = User.fromJSON(bufStr);
+        String param = parseParam(req.getQueryString());
         //--------------------------------------------------
         gResp(UserList.findUserSetStatus(user,param),resp.getOutputStream());
-        is.close();
+
+    }
+
+    public byte[] requestBodyToArray(HttpServletRequest request) throws IOException {
+        InputStream inputStream = request.getInputStream();
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        byte[] buf = new byte[12240];
+        int r;
+
+        do {
+            r = inputStream.read(buf);
+            if (r > 0) byteArrayOutputStream.write(buf, 0, r);
+        } while (r != -1);
+
+        return byteArrayOutputStream.toByteArray();
     }
 
     private String parseParam(String param){
-        String[] p=param.split("=");
+        String[] p = param.split("=");
         return p[1];
     }
 
