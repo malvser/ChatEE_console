@@ -3,15 +3,16 @@ package malov.serg.ChatEE_console_Client;
 import java.util.Scanner;
 
 
-public class Reader {
+public class ReaderInfo {
     private Scanner scn;
     private String login;
-    public Reader(){
-        this.scn=new Scanner(System.in);
+    public ReaderInfo(){
+
+        this.scn = new Scanner(System.in);
     }
     public String readLogin(){
         System.out.print("enter Login: ");
-        login=scn.nextLine();
+        login = scn.nextLine();
         return login;
     }
     public String readPass(){

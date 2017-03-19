@@ -14,7 +14,7 @@ public class AllUsers extends Thread {
     private User[] users2;
 
     public AllUsers(){
-        this.users1=getUsersArray();
+        this.users1 = getUsersArray();
     }
 
 
@@ -61,7 +61,7 @@ public class AllUsers extends Thread {
         return null;
     }
 
-    private void cloneArray(){    // написать в generic  ... неуспел (((
+    private void cloneArray(){
         users1=new User[users2.length];
         for(int n=0;n<users1.length;++n){
             try {

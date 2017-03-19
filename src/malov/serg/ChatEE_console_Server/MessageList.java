@@ -6,13 +6,13 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 
 
-public class MessageList { //singleton обьект создается при инициализации класса
-    private static final MessageList msgList=new MessageList();
+public class MessageList { //singleton
+    private static final MessageList msgList = new MessageList();
 
-    private final ArrayList<Message> list=new ArrayList<Message>();
-    private final ArrayList<Message> listRed=new ArrayList<Message>();
-    private final ArrayList<Message> listBlue=new ArrayList<Message>();
-    private final ArrayList<Message> listGreen=new ArrayList<Message>();
+    private final ArrayList<Message> list = new ArrayList<Message>();
+    private final ArrayList<Message> listRed = new ArrayList<Message>();
+    private final ArrayList<Message> listBlue = new ArrayList<Message>();
+    private final ArrayList<Message> listGreen = new ArrayList<Message>();
 
     private MessageList(){};
     public static MessageList getInstance(){
@@ -20,13 +20,13 @@ public class MessageList { //singleton обьект создается при и
     }
 
     public synchronized void add(Message m){
-        ArrayList<Message> tList=getTargetList(m.getRoom());
+        ArrayList<Message> tList = getTargetList(m.getRoom());
         tList.add(m);
     }
 
     public synchronized String toJSON(int i,String to,String room){
-        ArrayList<Message> tList=getTargetList(room);
-        ArrayList<Message> resList=new ArrayList<Message>();
+        ArrayList<Message> tList = getTargetList(room);
+        ArrayList<Message> resList = new ArrayList<Message>();
         for(int n=i;n<tList.size();++n){
             if(equal(tList.get(n), to))
             resList.add(tList.get(n));
@@ -36,7 +36,7 @@ public class MessageList { //singleton обьект создается при и
         resList.add(wm);
         // to JSON
         if(resList.size()>1){
-            Gson gson=new GsonBuilder().create();
+            Gson gson = new GsonBuilder().create();
             return gson.toJson(resList.toArray());
         }else{
             return null;
@@ -55,8 +55,8 @@ public class MessageList { //singleton обьект создается при и
     }
 
     private boolean equal(Message m, String to){
-        boolean all=m.getTo().equalsIgnoreCase("all");
-        boolean me=m.getTo().equalsIgnoreCase(to);
+        boolean all = m.getTo().equalsIgnoreCase("all");
+        boolean me = m.getTo().equalsIgnoreCase(to);
         return all||me;
     }
 }

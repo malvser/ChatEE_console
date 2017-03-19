@@ -8,6 +8,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -26,20 +27,20 @@ public class Message implements Serializable{
 
     public Message(){};
     public Message(String text,String from,String to,String room){
-        this.message=text;
-        this.from=from;
-        this.to=to;
-        this.room=room;
+        this.message = text;
+        this.from = from;
+        this.to = to;
+        this.room = room;
     }
 
     private String toJSON(){
-        Gson gson=new GsonBuilder().create();
-        return gson.toJson(this);   // запихиваем  в gson и выводим стринг
+        Gson gson = new GsonBuilder().create();
+        return gson.toJson(this);
     }
 
     public int send(String url)throws IOException{
-        URL u=new URL(url);
-        HttpURLConnection conn=(HttpURLConnection)u.openConnection();
+        URL u = new URL(url);
+        HttpURLConnection conn = (HttpURLConnection)u.openConnection();
         conn.setRequestMethod("POST");
         conn.setDoOutput(true);
         OutputStream os=conn.getOutputStream();
@@ -55,16 +56,16 @@ public class Message implements Serializable{
     @Override
     public String toString() {
         StringBuilder sb=new StringBuilder();
-        sb.append("| "+message+" | room:["+room+"] from:["+from+"]"+" to:["+Who()+"] "+getStringDate());
+        sb.append("| "+ message + " | room:["+room+"] from:[" + from + "]" + " to:[" + Who() + "] " + getStringDate());
         return sb.toString();
     }
 
     private String Who(){
-        return (to!=null)?to:"all";
+        return (to!=null)? to : "all";
     }
 
     private String getStringDate(){
-        SimpleDateFormat sdf=new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         return sdf.format(date);
     }
 

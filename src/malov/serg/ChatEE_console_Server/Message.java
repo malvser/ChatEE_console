@@ -30,16 +30,16 @@ public class Message implements Serializable {
 
     public String toJSON(){
         Gson gson=new GsonBuilder().create();
-        return gson.toJson(this);   // запихиваем сообщение в gson и выводим стринг
+        return gson.toJson(this);
     }
-    public static Message fromJSON(String s){ // почему static
+    public static Message fromJSON(String s){
         Gson gson=new GsonBuilder().create();
-        return gson.fromJson(s,Message.class); //возвращаем обьект message из стринга
+        return gson.fromJson(s,Message.class);
     }
 
     public int send(String url)throws IOException{
-        URL u=new URL(url);
-        HttpURLConnection conn=(HttpURLConnection)u.openConnection();
+        URL u = new URL(url);
+        HttpURLConnection conn =(HttpURLConnection)u.openConnection();
         conn.setRequestMethod("POST");
         conn.setDoOutput(true);
         OutputStream os=conn.getOutputStream();

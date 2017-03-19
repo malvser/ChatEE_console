@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AllMessages extends Thread{
-    private int n; // в оригинале int n;
+    private int n;
     private Map<String,Integer> rCounter=new HashMap<String, Integer>();
     private String login;
     private String room;

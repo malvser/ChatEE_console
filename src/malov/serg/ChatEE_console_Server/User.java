@@ -6,10 +6,10 @@ import com.google.gson.GsonBuilder;
 import java.io.Serializable;
 
 public class User implements Serializable,Cloneable {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
     private String login;
     private String pass;
-    private String status="offline";
+    private String status = "offline";
     private String room;
 
     public User(){}
@@ -40,12 +40,12 @@ public class User implements Serializable,Cloneable {
     }
 
     private String toJSON(){
-        Gson gson=new GsonBuilder().create();
+        Gson gson = new GsonBuilder().create();
         return gson.toJson(this);
     }
 
     public static User fromJSON(String u){
-        Gson gson=new GsonBuilder().create();
+        Gson gson = new GsonBuilder().create();
         return gson.fromJson(u,User.class);
     }
 
@@ -57,10 +57,10 @@ public class User implements Serializable,Cloneable {
 
     @Override
     public int hashCode() {
-        byte[] bytes=(login+status+room+(this.getClass().getSimpleName())).getBytes();
-        int rez=0;
-        for(Byte b:bytes)
-            rez+=b.intValue();
+        byte[] bytes=(login + status + room + (this.getClass().getSimpleName())).getBytes();
+        int rez = 0;
+        for(Byte b : bytes)
+            rez += b.intValue();
         return rez;
     }
 }

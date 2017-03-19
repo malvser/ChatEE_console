@@ -6,50 +6,50 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 
 public class UserList { //singleton
-    private static UserList ul=new UserList();
-    private ArrayList<User> list=new ArrayList<User>();
+    private static UserList userList = new UserList();
+    private ArrayList<User> list = new ArrayList<User>();
 
-    public static UserList getInstance(){return ul;}
+    public static UserList getInstance(){return userList;}
     private UserList(){
         list.add(new User("Sergey","ser"));
-        list.add(new User("Tanya","tan "));
+        list.add(new User("Tanya","tan"));
         list.add(new User("Artem","art"));
     }
     public String toJson(){
-        Gson gson=new GsonBuilder().create();
+        Gson gson = new GsonBuilder().create();
         return gson.toJson(list.toArray());
     }
     public String toJsonNoPass(){
-        User[] listRez=new User[list.size()];
-        for(int n=0;n<list.size();++n) {
-            User u=cloneUser(list.get(n));
-            u.setPass(null);
-            listRez[n] =u;
+        User[] listRez = new User[list.size()];
+        for(int n = 0; n < list.size(); ++n) {
+            User user = cloneUser(list.get(n));
+            user.setPass(null);
+            listRez[n] = user;
         }
-        Gson gson=new GsonBuilder().create();
+        Gson gson = new GsonBuilder().create();
         return gson.toJson(listRez);
     }
 
-    private User cloneUser(User u){
+    private User cloneUser(User user){
         try {
-            return (User)u.clone();
+            return (User)user.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static boolean findUserSetStatus(User u,String type){
-        for(User cU:ul.list){
-            if(cU.getLogin().equalsIgnoreCase(u.getLogin())&&cU.getPass().equalsIgnoreCase(u.getPass())) {
+    public static boolean findUserSetStatus(User u, String type){
+        for(User user : userList.list){
+            if(user.getLogin().equalsIgnoreCase(u.getLogin()) && user.getPass().equalsIgnoreCase(u.getPass())) {
                 if (type.equalsIgnoreCase("login")) {
-                    cU.setStatus("online");
-                    cU.setRoom("default");
+                    user.setStatus("online");
+                    user.setRoom("default");
                 } else if (type.equalsIgnoreCase("logout")||type.equalsIgnoreCase("exit")) {
-                    cU.setStatus("offline");
-                    cU.setRoom(null);
+                    user.setStatus("offline");
+                    user.setRoom(null);
                 } else {
-                    cU.setRoom(type);
+                    user.setRoom(type);
                 }
                 return true;
             }
@@ -59,13 +59,13 @@ public class UserList { //singleton
 
     @Override
     public int hashCode() {
-      byte[] bytes=this.getClass().getSimpleName().getBytes();
-      int rez=0;
+      byte[] bytes = this.getClass().getSimpleName().getBytes();
+      int rez = 0;
         for(Byte b:bytes){
-            rez+=b.intValue();
+            rez += b.intValue();
         }
-        for(User u:list){
-            rez+=u.hashCode();
+        for(User user:list){
+            rez += user.hashCode();
         }
         return rez;
     }
